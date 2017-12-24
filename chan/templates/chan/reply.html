@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reply</title>
+</head>
+<body>
+<h1>Anonim №{{ message.id }}</h1>
+{% for m in messages %}
+    <div id="message{{ m.id }}">
+        <p>Anonim №{{ m.id }} published on {{ m.pub_date }}</p>
+        {% if m.reply_to_id != null %}
+            <p>Reply to №{{ m.reply_to_id }}: <a href = "{% url 'chan:reply' m.reply_to_id %}">{{ m.reply_to }}</a></p>
+        {% endif %}
+        <p>Your message: <a href = "{% url 'chan:reply' m.id %}"> {{ m.text_mess }}</a></p>
+        <hr/>
+    </div>
+{% endfor %}
+<h2>Reply to №{{ message.id }} with message:"{{ message.text_mess }}"</h2>
+<form method = "POST" action = "{% url 'chan:reply' message.id%}">
+    {% csrf_token %}
+    {{ form }}
+    <input type = "submit" value = "Send reply">
+</form>
+<p><a href = "{% url 'chan:show_messages' %}">Return to the main page</a></p>
+</body>
+</html>

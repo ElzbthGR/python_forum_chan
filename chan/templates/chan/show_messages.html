@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List of Messages</title>
+</head>
+<body>
+<h2>Hello, chan!!1</h2>
+<h3><a href = "{% url 'chan:new_record' %}">Add new record</a></h3>
+{% for m in messages %}
+    <div id="message{{ m.id }}">
+        <p>Anonim №{{ m.id }} published on {{ m.pub_date }}</p>
+        {% if m.reply_to_id != null %}
+            <p>Reply to №{{ m.reply_to_id }}: <a href = "{% url 'chan:reply' m.reply_to_id %}">{{ m.reply_to }}</a></p>
+        {% endif %}
+        <p>Your message: <a href = "{% url 'chan:reply' m.id %}">{{ m.text_mess }}</a></p>
+        <hr/>
+    </div>
+{% endfor %}
+</body>
+</html>

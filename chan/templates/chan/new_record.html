@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add record</title>
+</head>
+<body>
+    <h2>Add record</h2>
+    <form method="POST" action="{% url 'chan:new_record' %}">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Add">
+    </form>
+</body>
+</html>
